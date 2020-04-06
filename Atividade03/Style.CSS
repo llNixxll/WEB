@@ -1,0 +1,42 @@
+.row{
+    width: 700px;
+    height: 40px;
+    text-align: center;
+    display: table;
+}
+.row:nth-child(2n){
+    background-color: lightgray;
+}
+#fds{
+    background-color: red;
+}
+#fds > spam{
+    color: white;
+}
+.col1{
+    width: 40%;
+    height: 100%;
+    vertical-align: middle;
+    display: table-cell;
+}
+.col2{
+    width: 19%;
+    height: 100%;
+    vertical-align: middle;
+    display: table-cell;
+}
+.col3{
+    width: 19%;
+    height: 100%;
+    vertical-align: middle;
+    display: table-cell;
+}
+.col4{
+    width: 19%;
+    height: 100%;
+    vertical-align: middle;
+    display: table-cell;
+}
+.ref{
+    text-align: right;
+}
