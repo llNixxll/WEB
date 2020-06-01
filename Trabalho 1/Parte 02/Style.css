@@ -1,0 +1,151 @@
+.divisoria {
+    margin: 0 0 2rem 0;
+}
+
+#cabecalho-padrao {
+    width: 100%;
+    height: 50px;
+}
+
+#cabecalho-padrao .item-menu {
+    padding: 0 0 0 0;
+}
+
+#cabecalho-padrao .item-menu .link-menu {
+    text-align: center;
+    height: 100%;
+    padding-top: 12px;
+}
+
+a:-webkit-any-link {
+    text-decoration: none;
+    color: black;
+}
+
+#cabecalho-padrao>div:nth-child(n+2) {
+    border-style: groove;
+    border-width: 0px 0px 0px 1px;
+}
+
+.tabela {
+    display: table;
+    height: 100%;
+}
+
+.tabela:last-child {
+    border-style: groove;
+    border-width: 0 0 0 1px;
+}
+
+.tabela>.linha:first-child {
+    text-align: center;
+}
+
+.tabela>.linha:last-child>.celula {
+    vertical-align: bottom;
+}
+
+.tabela>.linha:first-child>.celula {
+    padding-top: 20px;
+}
+
+.linha {
+    display: table-row;
+}
+
+.celula {
+    display: table-cell;
+}
+
+.celula * {
+    width: 100%;
+}
+
+.menu_main>div:first-child {
+    padding-left: 30px;
+}
+
+.menu_main>div:last-child {
+    padding-right: 30px;
+}
+
+.menu_main>div {
+    margin-top: 20px;
+}
+
+.row {
+    width: 100%!important;
+}
+
+div.user>a {
+    width: 100%;
+    color: black!important;
+    background-color: white!important;
+}
+
+.produtos {
+    margin-top: 5rem;
+    margin-bottom: 10rem;
+}
+
+.card {
+    margin-right: 10px!important;
+}
+
+.title {
+    text-align: center;
+}
+
+.promo {
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+}
+
+.promo img {
+    width: 100%;
+}
+
+.info-pedido {
+    margin-bottom: 7rem;
+}
+
+.info-pedido .row:last-child>button {
+    margin-top: 3rem;
+    width: 100%;
+}
+
+.produtos-pedido {
+    margin-bottom: 2rem;
+    margin-top: 5rem;
+}
+
+.rodape {
+    margin-top: 30px;
+}
+
+@media (max-width: 767px) {
+    .tabela:last-child {
+        border-width: 1px 0 0 0!important;
+        margin-top: 40px;
+    }
+    .tabela>.linha:first-child>.celula {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .campo {
+        margin: 10px 0 10px 0;
+    }
+    .campo>input {
+        height: 50px;
+    }
+    .linha:last-child>.celula>input {
+        margin: 60px 0 10px 0;
+        height: 60px;
+    }
+}
+
+@media (min-width: 768px) {
+    .login {
+        height: 500px;
+    }
+}

@@ -1,0 +1,138 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="Style.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <title>
+        Carrinho
+    </title>
+</head>
+
+<body>
+    <div class="row menu_main">
+        <div class="col-8 col-md-8 buscar">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Buscar produtos ou conveniencias" aria-describedby="basic-addon1">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-secondary" type="button">Procurar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 col-md-4 user">
+            <div class="carrinho">
+
+            </div>
+            <div class="dropdown show user">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Usuario
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="#">Carrinho</a>
+                    <a class="dropdown-item" href="login.html">Sair</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="divisoria">
+
+    <div class="row produtos-pedido justify-content-center">
+        <div class="col-10 col-md-8">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Produto</th>
+                        <th scope="col">Preço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Heineken</td>
+                        <td>R$ 8,50</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Kaiser</td>
+                        <td>R$ 1,50</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Budweiser</td>
+                        <td>R$ 3,50</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row info-pedido justify-content-center">
+        <div class="col-md-8 col-10">
+            <form>
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Entregar em</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Rua blablabla" aria-label="Username" aria-describedby="basic-addon1">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Forma de pagamento</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            <option selected>Dinheiro</option>
+                            <option value="1">Credito</option>
+                            <option value="2">Debito</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Alguma referencia?</span>
+                        </div>
+                        <textarea class="form-control" aria-label="With textarea"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-light btn-lg">Realizar Pedido</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <hr class="divisoria">
+    <div class="row rodape justify-content-center">
+        <div class="col-3 col-md-3">
+            <h3>
+                Menu
+            </h3>
+            <br> bla bla bla bla bla<br> bla bla bla bla bla<br> bla bla bla bla bla<br> bla bla bla bla bla<br>
+        </div>
+        <div class="col-3 col-md-3">
+            <h3>
+                Menu
+            </h3>
+            <br> bla bla bla bla bla<br> bla bla bla bla bla<br> bla bla bla bla bla<br> bla bla bla bla bla<br>
+        </div>
+        <div class="col-3 col-md-3">
+            <h3>
+                Menu
+            </h3>
+            <br> bla bla bla bla bla<br> bla bla bla bla bla<br> bla bla bla bla bla<br> bla bla bla bla bla<br>
+        </div>
+    </div>
+</body>
+
+</html>
