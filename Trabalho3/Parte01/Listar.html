@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="Style.css">
+    <title>Lista Empregados</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div id="Adicionar-Empregado">
+            <div class="Titulo">
+                <h2>Adicionando novo Empregado</h2>
+            </div>
+            <div class="row Campo">
+                <div class="col-3">
+                    <label>Nome: </label>
+                </div>
+                <div class="col-9">
+                    <input id="ADD_nome" type="text" placeholder="Nome">
+                </div>
+            </div>
+            <div class="row Campo">
+                <div class="col-3">
+                    <label>Salario: </label>
+                </div>
+                <div class="col-9">
+                    <input id="ADD_salario" type="number" placeholder="0,00">
+                </div>
+            </div>
+            <div class="row Campo">
+                <div class="col-3">
+                    <label>Idade: </label>
+                </div>
+                <div class="col-9">
+                    <input id="ADD_idade" type="number" placeholder="0">
+                </div>
+            </div>
+            <div class="row Campo">
+                <div class="col-3">
+                    <label>Avatar: </label>
+                </div>
+                <div class="col-9">
+                    <input id="ADD_avatar" type="text" placeholder="http://url.do.avatar">
+                </div>
+            </div>
+            <div class="row Campo">
+                <div class="col-6">
+                    <input onclick="addEmpregado()" type="button" value="Adicionar">
+                </div>
+                <div class="col-6">
+                    <input type="button" value="Cancelar">
+                </div>
+            </div>
+        </div>
+        <div id="Editar-Empregado">
+            <div class="Titulo">
+                <h2>Editando Empregado</h2>
+            </div>
+            <div class="row Campo">
+                <div class="col-3">
+                    <label>Nome: </label>
+                </div>
+                <div class="col-9">
+                    <input id="ED_nome" type="text" placeholder="Nome">
+                </div>
+            </div>
+            <div class="row Campo">
+                <div class="col-3">
+                    <label>Salario: </label>
+                </div>
+                <div class="col-9">
+                    <input id="ED_salario" type="number" placeholder="0,00">
+                </div>
+            </div>
+            <div class="row Campo">
+                <div class="col-3">
+                    <label>Idade: </label>
+                </div>
+                <div class="col-9">
+                    <input id="ED_idade" type="number" placeholder="0">
+                </div>
+            </div>
+            <div class="row Campo">
+                <div class="col-3">
+                    <label>Avatar: </label>
+                </div>
+                <div class="col-9">
+                    <input id="ED_avatar" type="text" placeholder="http://url.do.avatar">
+                </div>
+            </div>
+            <div class="row Campo">
+                <div class="col-6">
+                    <input id="submit-editar" type="button" value="Editar">
+                </div>
+                <div class="col-6">
+                    <input type="button" value="Cancelar">
+                </div>
+            </div>
+        </div>
+        <table id="lista-empregados" style="width: 100%;">
+
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        document.getElementById("Editar-Empregado").style.display = "none";
+
+
+        var table = document.getElementById("lista-empregados");
+        var tabelinha = "<tr><th>ID</th><th>IMAGEM</th><th>NOME</th><th>SALÁRIO</th><th>IDADE</th><th>AÇÃO</th></tr>";
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    var objetoRetornado = JSON.parse(this.responseText);
+                    console.log(objetoRetornado.data);
+                    for (var i = 0; i < objetoRetornado.data.length; i++) {
+                        tabelinha = tabelinha +
+                            "<tr><td>" + objetoRetornado.data[i].id + "</td><td>" +
+                            "<img class='imagem' src=" + objetoRetornado.data[i].profile_image + ">" + "</td><td>" +
+                            objetoRetornado.data[i].employee_name + "</td><td>" +
+                            objetoRetornado.data[i].employee_salary + "</td><td>" +
+                            objetoRetornado.data[i].employee_age + "</td><td>" +
+
+                            `<img class='icone' src="lapis.png" onclick='abreEditar("` +
+                            objetoRetornado.data[i].id + `","` +
+                            objetoRetornado.data[i].employee_name + `","` +
+                            objetoRetornado.data[i].employee_salary + `","` +
+                            objetoRetornado.data[i].employee_age + `","` +
+                            objetoRetornado.data[i].profile_image + `")'>` + "<label class='espaco'> | </label>" +
+
+
+
+                            "<img class='icone' src='delete.png' onclick=excluiEmpregado('" + objetoRetornado.data[i].id + "','" + objetoRetornado.data[i].employee_name + "')>" + "</td></tr>";
+                    }
+                    table.innerHTML = tabelinha;
+                }
+            } else {
+
+            }
+        };
+        xhttp.open("GET", "http://rest-api-employees.jmborges.site/api/v1/employees", true);
+        xhttp.send();
+
+
+        function addEmpregado() {
+
+            var nome = document.getElementById('ADD_nome').value;
+            var salario = document.getElementById('ADD_salario').value;
+            var idade = document.getElementById('ADD_idade').value;
+            var avatar = document.getElementById('ADD_avatar').value;
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4) {
+                    if (this.status == 200) {
+                        var objetoRetornado = JSON.parse(this.responseText);
+                        alert(" Adicionado com sucesso!");
+                    }
+                }
+            };
+            xhttp.open("POST", "http://rest-api-employees.jmborges.site/api/v1/create", true);
+            xhttp.setRequestHeader('Content-type', 'application/json');
+
+            var novoEmp = {
+                name: nome,
+                salary: salario,
+                age: idade,
+                profile_image: avatar
+            };
+            xhttp.send(JSON.stringify(novoEmp));
+
+        }
+
+        function abreEditar(id, nome, salario, idade, imagem) {
+            document.getElementById("Editar-Empregado").style.display = "block";
+            document.getElementById("Adicionar-Empregado").style.display = "none";
+
+            document.getElementById("ED_nome").value = nome;
+            document.getElementById("ED_salario").value = salario;
+            document.getElementById("ED_idade").value = idade;
+            document.getElementById("ED_avatar").value = imagem;
+            document.getElementById("submit-editar").setAttribute("onclick", "editarEmpregado(`" + id + "`)");
+
+            console.log(id);
+        }
+
+        function editarEmpregado(id) {
+            debugger;
+            var nome = document.getElementById("ED_nome").value;
+            var salario = document.getElementById("ED_salario").value;
+            var idade = document.getElementById("ED_idade").value;
+            var avatar = document.getElementById("ED_avatar").value;
+
+            if (nome != null || salario != null || idade != null || avatar != null) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4) {
+                        if (this.status == 200) {
+                            var objetoRetornado = JSON.parse(this.responseText);
+                        }
+                    }
+                };
+                xhttp.open("PUT", "http://rest-api-employees.jmborges.site/api/v1/update/" + id, true);
+                xhttp.setRequestHeader('Content-type', 'application/json');
+
+                var novoEmp = {
+                    name: nome,
+                    salary: salario,
+                    age: idade,
+                    profile_image: avatar
+                };
+
+                xhttp.send(JSON.stringify(novoEmp));
+            } else {
+
+            }
+
+            document.getElementById("Editar-Empregado").style.display = "none";
+            document.getElementById("Adicionar-Empregado").style.display = "block";
+        }
+
+        function excluiEmpregado(id, nome) {
+            var confirmado = confirm("Deseja excluir: " + nome);
+            if (confirmado == true) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4) {
+                        if (this.status == 200) {
+                            var objetoRetornado = JSON.parse(this.responseText);
+                            console.log(objetoRetornado);
+                            if (objetoRetornado.status == "success") {
+                                alert("Empregado excluido com sucesso.");
+                            } else {
+                                alert("Ops, algo deu errado XD")
+                            }
+                        }
+                    }
+                };
+                xhttp.open("DELETE", "http://rest-api-employees.jmborges.site/api/v1/delete/" + id, true);
+                xhttp.setRequestHeader('Content-type', 'application/json');
+                xhttp.send();
+            }
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>
