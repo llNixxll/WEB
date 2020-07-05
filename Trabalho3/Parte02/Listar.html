@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="Style.css">
+    <title>Lista Empregados</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div id="Adicionar-Pet">
+            <div class="Titulo">
+                <h2>Adicionando novo Pet</h2>
+            </div>
+            <div class="row Campo">
+                <div class="col-3">
+                    <label>Nome: </label>
+                </div>
+                <div class="col-9">
+                    <input id="ADD_nome" type="text" placeholder="Nome">
+                </div>
+            </div>
+            <div class="row Campo">
+                <div class="col-3">
+                    <label>Raça: </label>
+                </div>
+                <div class="col-9">
+                    <input id="ADD_raca" type="text" placeholder="0,00">
+                </div>
+            </div>
+            <div class="row Campo">
+                <div class="col-3">
+                    <label>Peso: </label>
+                </div>
+                <div class="col-9">
+                    <input id="ADD_peso" type="number" placeholder="0">
+                </div>
+            </div>
+            <div class="row Campo">
+                <div class="col-3">
+                    <label>Idade: </label>
+                </div>
+                <div class="col-9">
+                    <input id="ADD_idade" type="number" placeholder="0">
+                </div>
+            </div>
+            <div class="row Campo">
+                <div class="col-3">
+                    <label>Foto: </label>
+                </div>
+                <div class="col-9">
+                    <input id="ADD_avatar" type="text" placeholder="http://url.do.avatar">
+                </div>
+            </div>
+            <div class="row Campo">
+                <div class="col-6">
+                    <input onclick="addPet()" type="button" value="Adicionar">
+                </div>
+                <div class="col-6">
+                    <input type="button" value="Cancelar">
+                </div>
+            </div>
+        </div>
+        <div id="Editar-Pet">
+            <div class="Titulo">
+                <h2>Editando Empregado</h2>
+            </div>
+            <div class="row Campo">
+                <div class="col-3">
+                    <label>Nome: </label>
+                </div>
+                <div class="col-9">
+                    <input id="ED_nome" type="text" placeholder="Nome">
+                </div>
+            </div>
+            <div class="row Campo">
+                <div class="col-3">
+                    <label>Raça: </label>
+                </div>
+                <div class="col-9">
+                    <input id="ED_raca" type="text" placeholder="0,00">
+                </div>
+            </div>
+            <div class="row Campo">
+                <div class="col-3">
+                    <label>Peso: </label>
+                </div>
+                <div class="col-9">
+                    <input id="ED_peso" type="number" placeholder="0">
+                </div>
+            </div>
+            <div class="row Campo">
+                <div class="col-3">
+                    <label>Idade: </label>
+                </div>
+                <div class="col-9">
+                    <input id="ED_idade" type="number" placeholder="0">
+                </div>
+            </div>
+            <div class="row Campo">
+                <div class="col-3">
+                    <label>Avatar: </label>
+                </div>
+                <div class="col-9">
+                    <input id="ED_avatar" type="text" placeholder="http://url.do.avatar">
+                </div>
+            </div>
+            <div class="row Campo">
+                <div class="col-6">
+                    <input id="submit-editar" type="button" value="Editar">
+                </div>
+                <div class="col-6">
+                    <input type="button" value="Cancelar">
+                </div>
+            </div>
+        </div>
+        <table id="lista-Pet" style="width: 100%;">
+
+        </table>
+        <h1> Veja tambem!!! </h1>
+        <table id="lista-Acessorios" style="width: 100%;">
+
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        document.getElementById("Editar-Pet").style.display = "none";
+
+
+        var table = document.getElementById("lista-Pet");
+        var tabelinha = "<tr><th>ID</th><th>IMAGEM</th><th>NOME</th><th>RAÇA</th><th>PESO</th><th>IDADE</th><th>AÇÃO</th></tr>";
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    var objetoRetornado = JSON.parse(this.responseText);
+                    for (var i = 0; i < objetoRetornado.length; i++) {
+                        tabelinha = tabelinha +
+                            "<tr><td>" + objetoRetornado[i].id + "</td><td>" +
+                            "<img class='imagem' src=" + objetoRetornado[i].imagem + ">" + "</td><td>" +
+                            objetoRetornado[i].nome + "</td><td>" +
+                            objetoRetornado[i].raca + "</td><td>" +
+                            objetoRetornado[i].peso + "</td><td>" +
+                            objetoRetornado[i].idade + "</td><td>" +
+
+                            `<img class='icone' src="lapis.png" onclick='abreEditar("` +
+                            objetoRetornado[i].id + `","` +
+                            objetoRetornado[i].nome + `","` +
+                            objetoRetornado[i].raca + `","` +
+                            objetoRetornado[i].peso + `","` +
+                            objetoRetornado[i].idade + `","` +
+                            objetoRetornado[i].imagem + `")'>` + "<label class='espaco'> | </label>" +
+
+
+
+                            "<img class='icone' src='delete.png' onclick=excluiPet('" + objetoRetornado[i].id + "','" + objetoRetornado[i].nome + "')>" + "</td></tr>";
+                    }
+                    table.innerHTML = tabelinha;
+                }
+            } else {
+
+            }
+        };
+        xhttp.open("GET", "https://private-9f406-trabalhoweb.apiary-mock.com/pets", true);
+        xhttp.send();
+
+        var table1 = document.getElementById("lista-Acessorios");
+        var tabelinha1 = "<tr><th>ID</th><th>PRODUTO</th><th>QUANTIDADE</th></tr>";
+        var xhttp1 = new XMLHttpRequest();
+        xhttp1.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    var objetoRetornado1 = JSON.parse(this.responseText);
+                    for (var i = 0; i < objetoRetornado1.length; i++) {
+                        tabelinha1 = tabelinha1 +
+                            "<tr><td>" + objetoRetornado1[i].id + "</td><td>" +
+                            objetoRetornado1[i].produto + "</td><td>" +
+                            objetoRetornado1[i].qtd + "</td>"
+                    }
+                    table1.innerHTML = tabelinha1;
+                }
+            } else {
+
+            }
+        };
+        xhttp1.open("GET", "https://private-9f406-trabalhoweb.apiary-mock.com/acessorios", true);
+        xhttp1.send();
+
+        function addPet() {
+
+            var nome = document.getElementById('ADD_nome').value;
+            var raca = document.getElementById('ADD_raca').value;
+            var peso = document.getElementById('ADD_peso').value;
+            var idade = document.getElementById('ADD_idade').value;
+            var avatar = document.getElementById('ADD_avatar').value;
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4) {
+                    if (this.status == 200) {
+                        var objetoRetornado = JSON.parse(this.responseText);
+                        alert(objetoRetornado.Mensagem);
+                    }
+                }
+            };
+            xhttp.open("POST", "https://private-9f406-trabalhoweb.apiary-mock.com/pets", true);
+            xhttp.setRequestHeader('Content-type', 'application/json');
+
+            var novoPet = {
+                id: 7,
+                nome: nome,
+                raca: raca,
+                peso: peso,
+                idade: idade,
+                imagem: avatar
+            };
+            xhttp.send(JSON.stringify(novoPet));
+
+        }
+
+        function abreEditar(id, nome, raca, peso, idade, imagem) {
+            document.getElementById("Editar-Pet").style.display = "block";
+            document.getElementById("Adicionar-Pet").style.display = "none";
+
+            document.getElementById("ED_nome").value = nome;
+            document.getElementById("ED_raca").value = raca;
+            document.getElementById("ED_peso").value = peso;
+            document.getElementById("ED_idade").value = idade;
+            document.getElementById("ED_avatar").value = imagem;
+            document.getElementById("submit-editar").setAttribute("onclick", "editarPet(`" + id + "`)");
+
+            console.log(id);
+        }
+
+        function editarPet(id) {
+            var nome = document.getElementById("ED_nome").value;
+            var raca = document.getElementById("ED_raca").value;
+            var peso = document.getElementById("ED_peso").value;
+            var idade = document.getElementById("ED_idade").value;
+            var avatar = document.getElementById("ED_avatar").value;
+
+            if (nome != null || salario != null || idade != null || avatar != null) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4) {
+                        if (this.status == 200) {
+                            var objetoRetornado = JSON.parse(this.responseText);
+                            alert(objetoRetornado.Mensagem);
+                        }
+                    }
+                };
+                xhttp.open("PUT", "https://private-9f406-trabalhoweb.apiary-mock.com/pets/" + id, true);
+                xhttp.setRequestHeader('Content-type', 'application/json');
+
+                var novoPet = {
+                    id: id,
+                    nome: nome,
+                    raca: raca,
+                    peso: peso,
+                    idade: idade,
+                    imagem: avatar
+                };
+
+                xhttp.send(JSON.stringify(novoPet));
+            } else {
+
+            }
+
+            document.getElementById("Editar-Pet").style.display = "none";
+            document.getElementById("Adicionar-Pet").style.display = "block";
+        }
+
+        function excluiPet(id, nome) {
+            var confirmado = confirm("Deseja excluir: " + nome);
+            if (confirmado == true) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4) {
+                        if (this.status == 200) {
+                            var objetoRetornado = JSON.parse(this.responseText);
+                            alert(objetoRetornado.Mensagem);
+                        }
+                    }
+                };
+                xhttp.open("DELETE", "https://private-9f406-trabalhoweb.apiary-mock.com/pets/" + id, true);
+                xhttp.setRequestHeader('Content-type', 'application/json');
+                xhttp.send();
+            }
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>
